@@ -21,4 +21,4 @@ def status():
         relay1 = requests.post(url = 'http://192.168.0.169/cm?cmnd=Power1%20On')
         state = f'Switch ON'
     return render_template('status.html', state=state)
-    #return f'<h1> {status} </h1>'
+    
