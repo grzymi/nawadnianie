@@ -2,11 +2,22 @@ from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from datetime import datetime
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
 import requests
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+app.config['SECRET_KEY'] = 'to_trzeba_zmienic_przed_finalna_wersja'
+
+class NameForm(FlaskForm):
+    name = StringField('Jak masz na imie?', validators = [DataRequired()])
+    submit = SubmitField('Wyślij')
+
+
 
 @app.route('/')
 def index():
