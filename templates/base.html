@@ -1,5 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment()}}
+{{ moment.locale('pl')}}
+{% endblock %}
+
+
 {%block head %}
 {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"
