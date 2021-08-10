@@ -6,6 +6,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from forms import NameForm, SelectMethod, TimeForZones
+from dane import suma
 
 import requests
 
@@ -36,20 +37,20 @@ def index():
 
 @app.route('/automatic', methods=['GET', 'POST'])
 def automatic():
-    plot = 0
-    altana = 0
-    corner = 0
-    front = 0
+    #plot = 0
+    #altana = 0
+    #corner = 0
+    #front = 0
     form = TimeForZones()
     if form.validate_on_submit():
         session['plot'] = form.plot.data
         session['altana'] = form.altana.data
         session['corner'] = form.corner.data
         session['front'] = form.front.data
-        return redirect(url_for('automatic'))
+        return redirect(url_for('automatic')), suma(form.plot.data, form.altana.data, form.corner.data, form.front.data)
     return render_template('automatic.html', current_time = datetime.utcnow(), form=form,
-                           plot=session.get['plot'], altana=session.get['altana'], corner=session.get['corner'],
-                           front=session.get['front'])
+                           plot=session.get('plot'), altana=session.get('altana'), corner=session.get('corner'),
+                           front=session.get('front'))
 '''
 @app.route('/', methods=['GET', 'POST'])
 def index():
