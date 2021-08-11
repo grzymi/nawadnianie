@@ -43,14 +43,15 @@ def automatic():
     #front = 0
     form = TimeForZones()
     if form.validate_on_submit():
+        session['godzina'] = form.godzina.data
         session['plot'] = form.plot.data
         session['altana'] = form.altana.data
         session['corner'] = form.corner.data
         session['front'] = form.front.data
-        return redirect(url_for('automatic')), suma(form.plot.data, form.altana.data, form.corner.data, form.front.data)
+        return redirect(url_for('automatic')), suma(form.godzina.data, form.plot.data, form.altana.data, form.corner.data, form.front.data)
     return render_template('automatic.html', current_time = datetime.utcnow(), form=form,
                            plot=session.get('plot'), altana=session.get('altana'), corner=session.get('corner'),
-                           front=session.get('front'))
+                           front=session.get('front'), godzina=session.get('godzina'))
 '''
 @app.route('/', methods=['GET', 'POST'])
 def index():
